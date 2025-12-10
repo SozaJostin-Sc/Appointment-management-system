@@ -7,6 +7,7 @@ import com.gestionMedica.main.entities.Rol;
 import com.gestionMedica.main.entities.User;
 import com.gestionMedica.main.repository.RolRepository;
 import com.gestionMedica.main.repository.UserRepository;
+import com.gestionMedica.main.service.doctor.DoctorService;
 import com.gestionMedica.main.service.user.utils.UserMapper;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -25,7 +26,7 @@ public class AdminUserService {
     private final PasswordEncoder passwordEncoder;
     private final RolRepository rolRepository;
     private final UserMapper userMapper;
-
+    private final DoctorService doctorService;
 
     /// Obtener todos los usuarios
     public List<UserResponse> getAll(){
@@ -61,6 +62,10 @@ public class AdminUserService {
                 .rol(rol)
                 .build();
 
+        // When we create a user that role name is "Doctor" we create a new default doctor.
+        if(newUser.getRol().getRolName().equalsIgnoreCase("DOCTOR")){
+            doctorService.createDefaultDoctor(newUser);
+        }
         // Guardar el usuario
         User savedUser = userRepository.save(newUser);
 

@@ -19,7 +19,7 @@ public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "doctor_id")
-    private Integer doctorId;
+    private Long doctorId;
 
     @Column(name = "first_name", nullable = false, length = 50)
     private String firstName;
@@ -57,5 +57,6 @@ public class Doctor {
             joinColumns = @JoinColumn(name = "doctor_id"),
             inverseJoinColumns = @JoinColumn(name = "specialization_id")
     )
+    @Builder.Default
     private Set<Specialization> specializations = new HashSet<>();
 }

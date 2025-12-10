@@ -24,9 +24,6 @@ public class CreateDoctor {
     @Size(max = 30, message = "Last name size cannot be more than 30 characters")
     private String lastName;
 
-    @NotNull(message = "The ID of the user associated with the doctor is required.")
-    private Long userId;
-
     @NotNull(message = "At least one specialization must be provided.")
     @Size(min = 1, message = "At least one specialization must be provided.")
     private Set<Long> specializationIds;
