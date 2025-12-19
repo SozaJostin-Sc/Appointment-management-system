@@ -1,10 +1,41 @@
-HELP.md
-target/
-.mvn/wrapper/maven-wrapper.jar
+# =========================================================
+# JAVA / SPRING BOOT (API)
+# =========================================================
+api/target/
+api/build/
+api/.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+HELP.md
 
-### STS ###
+# =========================================================
+# DOCKER & DATABASE (IMPORTANTE)
+# =========================================================
+# Ignorar los datos físicos de la base de datos para no subirlos al repo
+medical_data/
+postgres_data/
+db/data/
+
+# Variables de entorno y secretos
+*.env
+*.local
+secrets.yml
+.env
+
+# =========================================================
+# IDEs / TOOLS
+# =========================================================
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+### VS Code ###
+.vscode/
+
+### STS / Eclipse ###
 .apt_generated
 .classpath
 .factorypath
@@ -13,42 +44,21 @@ target/
 .springBeans
 .sts4-cache
 
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
+# =========================================================
+# CONFIGURACIÓN ESPECÍFICA
+# =========================================================
+# Ignorar archivos de propiedades con credenciales reales
+api/src/main/resources/application-*.properties
+!api/src/main/resources/application.properties
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
-.vscode/
-
-application-*.properties
-!application.properties
 TASK.txt
 
-# Variables de entorno y secretos
-*.env
-*.local
-secrets.yml
-
-# Archivos de Log
+# Archivos de Log y Sistema
 *.log
 logs/
-
-# Archivos de Sistema Operativo
 .DS_Store
 Thumbs.db
 
-# Cobertura de Código / QA
+# Cobertura de Código
 coverage/
 jacoco.exec

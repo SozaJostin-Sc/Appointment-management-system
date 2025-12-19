@@ -1,0 +1,28 @@
+services:
+  database-service:
+    build: ./Database
+    container_name: medical_db
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: medical
+    ports:
+      - "5432:5432"
+    volumes:
+      - medical_data:/var/lib/postgresql/data
+
+  api-service:
+      build: ./API
+      container_name: medical_api
+      ports:
+        - "8080:8080"
+      depends_on:
+        - database-service
+      environment:
+        SPRING_DATASOURCE_URL: jdbc:postgresql://database-service:5432/medical
+        SPRING_DATASOURCE_USERNAME: admin
+        SPRING_DATASOURCE_PASSWORD: admin123
+        SPRING_JPA_HIBERNATE_DDL_AUTO: validate
+
+volumes:
+  medical_data:
