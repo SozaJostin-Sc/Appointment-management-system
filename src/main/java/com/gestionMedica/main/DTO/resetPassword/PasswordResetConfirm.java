@@ -1,4 +1,4 @@
-package com.gestionMedica.main.DTO;
+package com.gestionMedica.main.DTO.resetPassword;
 
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -12,8 +12,5 @@ public class PasswordResetConfirm {
     @NotBlank(message = "La nueva contrasena es obligatoria")
     @Size(min = 8, message = "La contrasena debe tener al menos 8 caracteres")
     private String newPassword;
-
-    @NotBlank(message = "La confirmacion de la contrasena debe ser obligatoria")
-    private String confirmPassword;
 
 }

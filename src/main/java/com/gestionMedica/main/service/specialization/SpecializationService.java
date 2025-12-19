@@ -28,7 +28,7 @@ public class SpecializationService {
      *
      */
     public List<SpecializationResponse> getAll() {
-        return specializationMapper.toDtoList(specializationRepository.findAllByOrderBySpecializationIdAsc());
+        return specializationMapper.toDtoList(specializationRepository.findAllByOrderBySpIdAsc());
     }
 
     /**

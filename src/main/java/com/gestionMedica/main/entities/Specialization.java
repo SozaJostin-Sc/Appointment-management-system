@@ -2,6 +2,7 @@ package com.gestionMedica.main.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -25,9 +26,9 @@ public class Specialization {
     @Column(name = "specialization_description")
     private String description;
 
-    @Column(name = "date_creation", nullable = false)
-    @Builder.Default
-    private LocalDateTime dateCreation = LocalDateTime.now();
+    @CreationTimestamp
+    @Column(name = "date_creation", nullable = false, updatable = false)
+    private LocalDateTime dateCreation;
 
     @Builder.Default
     @Column(nullable = false)

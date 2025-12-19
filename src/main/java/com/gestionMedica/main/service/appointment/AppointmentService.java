@@ -3,7 +3,7 @@ package com.gestionMedica.main.service.appointment;
 
 
 import com.gestionMedica.main.DTO.appointment.CreateAppointment;
-import com.gestionMedica.main.entities.Appointment;
+import com.gestionMedica.main.entities.Appointments;
 import com.gestionMedica.main.exceptions.appointment.AppointmentNotFoundException;
 import com.gestionMedica.main.repository.AppointmentRepository;
 import jakarta.transaction.Transactional;
@@ -19,12 +19,12 @@ public class AppointmentService {
     private final AppointmentRepository appointmentRepository;
 
     /// OBTENER TODO
-    public List<Appointment> getAll(){
+    public List<Appointments> getAll(){
         return appointmentRepository.findAll();
     }
 
     /// Obtener por id
-    public Appointment getById(Long id){
+    public Appointments getById(Long id){
         return appointmentRepository.findById(id)
                 .orElseThrow(
                         () -> {
@@ -33,10 +33,10 @@ public class AppointmentService {
     }
 
     @Transactional
-    public Appointment create(CreateAppointment dto){
-        Appointment appointment = new Appointment();
+    public Appointments create(CreateAppointment dto){
+        Appointments appointments = new Appointments();
 
-        return appointment;
+        return appointments;
     }
 
 

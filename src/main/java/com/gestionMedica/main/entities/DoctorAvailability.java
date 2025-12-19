@@ -2,6 +2,7 @@ package com.gestionMedica.main.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.*;
 
@@ -18,6 +19,7 @@ public class DoctorAvailability {
     @Column(name = "availability_id")
     private Long availabilityId;
 
+    /// REFERENCE TO DOCTOR
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doctor_id", nullable = false)
     private Doctor doctor;
@@ -32,16 +34,18 @@ public class DoctorAvailability {
     private LocalTime endTime;
 
     @Column(name = "is_available", nullable = false)
+    @Builder.Default
     private Boolean isAvailable = true;
 
-    @Column(name = "date_creation", nullable = false)
-    private LocalDateTime dateCreation = LocalDateTime.now();
+    @CreationTimestamp
+    @Column(name = "date_creation", nullable = false, updatable = false)
+    private LocalDateTime dateCreation;
 
     @OneToOne(mappedBy = "availability")
-    private Appointment appointment;
+    private Appointments appointments;
 
     public boolean isTimeSlotAvailable() {
-        return isAvailable && appointment == null;
+        return isAvailable && appointments == null;
     }
 
     public boolean overlapsWith(LocalTime otherStart, LocalTime otherEnd) {

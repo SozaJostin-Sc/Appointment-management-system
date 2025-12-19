@@ -1,4 +1,4 @@
-package com.gestionMedica.main.DTO;
+package com.gestionMedica.main.DTO.resetPassword;
 
 import lombok.*;
 import jakarta.validation.constraints.*;

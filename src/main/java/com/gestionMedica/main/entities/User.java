@@ -2,10 +2,10 @@ package com.gestionMedica.main.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "user_tb")
@@ -20,7 +20,7 @@ public class User {
     @Column(name = "user_id")
     private Long userId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "rol_id", nullable = false)
     private Rol rol;
 
@@ -36,11 +36,13 @@ public class User {
     @Column(name = "user_status", nullable = false)
     private Boolean userStatus = true;
 
-    @Column(name = "date_creation", nullable = false)
-    private LocalDateTime dateCreation = LocalDateTime.now();
+    @CreationTimestamp
+    @Column(name = "date_creation", nullable = false, updatable = false)
+    private LocalDateTime dateCreation;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<PasswordResetToken> passwordResetTokens = new ArrayList<>();
+    @Builder.Default
+    private Set<PasswordResetToken> passwordResetTokens = new HashSet<>();
 
     /// Relacion 1 a 1 con paciente
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

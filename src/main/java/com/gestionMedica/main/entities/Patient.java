@@ -45,5 +45,5 @@ public class Patient {
     private String phoneNumber;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
-    private Set<Appointment> appointments = new HashSet<>();
+    private Set<Appointments> appointments = new HashSet<>();
 }

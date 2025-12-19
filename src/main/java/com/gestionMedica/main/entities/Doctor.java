@@ -48,9 +48,6 @@ public class Doctor {
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ScheduleTemplates> scheduleTemplates = new HashSet<>();
 
-    @OneToMany(mappedBy = "doctor")
-    private Set<Appointment> appointments = new HashSet<>();
-
     @ManyToMany
     @JoinTable(
             name = "doctor_specialization_tb",

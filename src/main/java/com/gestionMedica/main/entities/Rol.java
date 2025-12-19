@@ -3,6 +3,7 @@ package com.gestionMedica.main.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -30,8 +31,9 @@ public class Rol {
     @Column(name = "rol_status", nullable = false)
     private Boolean rolStatus = true;
 
-    @Column(name = "date_creation", nullable = false)
-    private LocalDateTime dateCreation = LocalDateTime.now();
+    @CreationTimestamp
+    @Column(name = "date_creation", nullable = false, updatable = false)
+    private LocalDateTime dateCreation;
 
     @OneToMany(mappedBy = "rol", cascade = CascadeType.ALL)
     private Set<User> user = new HashSet<>();

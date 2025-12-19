@@ -15,6 +15,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -33,7 +35,7 @@ public class PatientService {
 
     // Método auxiliar para buscar paciente por userId
     private Patient findPatientByUserId(Long userId) {
-        return patientRepository.findByUserId(userId)
+        return patientRepository.findByUser_UserId(userId)
                 .orElseThrow(() -> new PatientNotFoundException("Patient with user id: " + userId + " not found"));
     }
 
@@ -49,13 +51,17 @@ public class PatientService {
     public void createDefaultPatient(User user){
         Patient newPatient = Patient.builder()
                 .user(user)
-                .firstName("")
+                .firstName(user.getUserName().trim())
                 .secondName(null)
                 .middleName(null)
-                .lastName("")
-                .dateBirth(null)
+                .lastName("defaultLastName")
+                .dateBirth(LocalDate.of(
+                        2000,
+                        5,
+                        10
+                ))
                 .sex('O')
-                .phoneNumber("")
+                .phoneNumber("50578398013")
                 .build();
 
         patientRepository.save(newPatient);

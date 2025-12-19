@@ -2,6 +2,8 @@ package com.gestionMedica.main.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+
 import java.time.*;
 
 @Entity
@@ -11,9 +13,6 @@ import java.time.*;
 @AllArgsConstructor
 @Builder
 public class ScheduleTemplates {
-    public enum DayOfWeek {
-        Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,8 +36,9 @@ public class ScheduleTemplates {
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = true;
 
-    @Column(name = "date_creation", nullable = false)
-    private LocalDateTime dateCreation = LocalDateTime.now();
+    @CreationTimestamp
+    @Column(name = "date_creation", nullable = false, updatable = false)
+    private LocalDateTime dateCreation;
 
     public boolean isValidTimeRange() {
         return startTime != null && endTime != null && startTime.isBefore(endTime);

@@ -62,7 +62,7 @@ public class DoctorService {
      *
      */
     public List<DoctorResponse> getAllActive() {
-        return doctorMapper.toDtoList(doctorRepository.findAllByIsStatusTrueOrderByDoctorIdAsc());
+        return doctorMapper.toDtoList(doctorRepository.findAllByStatusTrueOrderByDoctorIdAsc());
     }
 
     /**
@@ -70,7 +70,7 @@ public class DoctorService {
      *
      */
     public List<DoctorResponse> getAllInactive() {
-        return doctorMapper.toDtoList(doctorRepository.findAllByIsStatusFalseOrderByDoctorIdAsc());
+        return doctorMapper.toDtoList(doctorRepository.findAllByStatusFalseOrderByDoctorIdAsc());
     }
 
     /**

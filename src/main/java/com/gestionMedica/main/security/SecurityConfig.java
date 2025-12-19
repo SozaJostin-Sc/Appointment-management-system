@@ -29,29 +29,6 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     /**
-     * Define un Bean para el codificador de contraseñas.
-     * Usamos BCrypt, que es un algoritmo de hashing fuerte y recomendado.
-     * @return El bean PasswordEncoder.
-     */
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
-
-    /**
-     * Define un Bean para el AuthenticationManager.
-     * El AuthenticationManager es necesario para el proceso de inicio de sesión.
-     * Se obtiene de la configuración de autenticación proporcionada por Spring.
-     * @param config La configuración de autenticación.
-     * @return El AuthenticationManager.
-     * @throws Exception Si ocurre un error al obtener el manager.
-     */
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-        return config.getAuthenticationManager();
-    }
-
-    /**
      * Configura la cadena de filtros de seguridad HTTP principal.
      * Este es el núcleo de la configuración de seguridad.
      * * @param http El objeto HttpSecurity para configurar la seguridad.
@@ -73,14 +50,14 @@ public class SecurityConfig {
                 // 3. Configuración de las reglas de autorización de peticiones HTTP.
                 .authorizeHttpRequests(auth -> auth
                         // Permitir acceso público (sin autenticación) a los endpoints de autenticación (login/registro)
-                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/auth/**", "api/medical/user/admin/**").permitAll()
                         // Permitir acceso público a endpoints de roles
-                        .requestMatchers("/api/medical/roles/**").permitAll()
+                        .requestMatchers("/api/medical/roles/**").hasRole("PATIENT")
                         // Permitir acceso público a endpoints de usuario (ej. registro)
                         .requestMatchers("/api/medical/user/**").permitAll()
 
                         // Restringir el acceso: Solo los usuarios con el ROL "ADMIN" pueden acceder a /api/medical/admin/**
-                        .requestMatchers("/api/medical/admin/**").hasRole("ADMIN")
+                        //.requestMatchers("/api/medical/admin/**").hasRole("ADMIN")
 
                         // Regla Catch-All: Para cualquier otra petición (anyRequest)
                         // se requiere que el usuario esté autenticado (authenticated()).

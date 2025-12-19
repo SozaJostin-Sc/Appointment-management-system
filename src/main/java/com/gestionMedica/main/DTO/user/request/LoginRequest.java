@@ -1,4 +1,4 @@
-package com.gestionMedica.main.DTO.user;
+package com.gestionMedica.main.DTO.user.request;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

@@ -1,7 +1,6 @@
 package com.gestionMedica.main.controller.user;
 
-import com.gestionMedica.main.DTO.user.RegisterUserDTO;
-import com.gestionMedica.main.DTO.user.UpdateUser;
+import com.gestionMedica.main.DTO.user.request.UpdateUser;
 import com.gestionMedica.main.DTO.user.response.UserResponse;
 import com.gestionMedica.main.DTO.user.response.UserStatusResponse;
 import com.gestionMedica.main.service.user.UserService;
@@ -21,12 +20,6 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<UserResponse> getById(@PathVariable Long id){
         return ResponseEntity.ok(userService.getById(id));
-    }
-
-    /// CREAR USUARIO
-    @PostMapping()
-    public ResponseEntity<UserResponse> create(@Valid @RequestBody RegisterUserDTO dto){
-        return new ResponseEntity<>(userService.create(dto), HttpStatus.CREATED);
     }
 
     /// ACTUALIZAR USUARIO

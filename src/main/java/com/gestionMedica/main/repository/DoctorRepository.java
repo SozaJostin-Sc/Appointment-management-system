@@ -9,11 +9,11 @@ import java.util.Optional;
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
     List<Doctor> findAllByOrderByDoctorIdAsc();
 
-    List<Doctor> findAllByIsStatusTrueOrderByDoctorIdAsc();
+    List<Doctor> findAllByStatusTrueOrderByDoctorIdAsc();
 
-    List<Doctor> findAllByIsStatusFalseOrderByDoctorIdAsc();
+    List<Doctor> findAllByStatusFalseOrderByDoctorIdAsc();
 
-    Optional<Doctor> findByIdAndIsStatusTrue(Long id);
+    Optional<Doctor> findByDoctorIdAndStatusTrue(Long id);
 
-    Optional<Doctor> findByIdAndIsStatusFalse(Long id);
+    Optional<Doctor> findByDoctorIdAndStatusFalse(Long id);
 }

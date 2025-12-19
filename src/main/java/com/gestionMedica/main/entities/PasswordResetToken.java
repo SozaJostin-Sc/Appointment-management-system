@@ -3,6 +3,8 @@ package com.gestionMedica.main.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -10,6 +12,7 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class PasswordResetToken {
 
     @Id
@@ -30,12 +33,9 @@ public class PasswordResetToken {
     @Column(name = "is_used", nullable = false)
     private Boolean isUsed = false;
 
-    @Column(name = "created_at", nullable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
-
-    public PasswordResetToken(User user, String hashedToken, LocalDateTime expiryDate) {
-    }
-
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
 
     // Método auxiliar para verificar si el token ha expirado
     public boolean isExpired() {
